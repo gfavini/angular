@@ -1,0 +1,10 @@
+com\favini\domain\Cliente.class
+com\favini\controller\EstadoController.class
+com\favini\repository\EstadoRepository.class
+com\favini\repository\ClienteRepository.class
+com\favini\ApiwebApplication.class
+com\favini\domain\Estado.class
+com\favini\controller\ClienteController.class
+com\favini\services\ClienteService.class
+com\favini\services\EstadoService.class
+com\favini\controller\HomeController.class

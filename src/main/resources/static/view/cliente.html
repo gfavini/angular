@@ -1,0 +1,78 @@
+<style>
+    fieldset{
+        display: inline;
+    }    
+</style>
+
+<div>
+    
+    Ola {{nome + ' ' + sobreNome}}<br/>
+    {{cliente.name}}<br/>
+    
+    <form novalidate name="frmClientes">
+        <div>
+            <label>Nome: </label>
+            <input type="text" name ="uName" ng-model="cliente.name" ng-minlength="3" ng-maxlength="40" required/>
+            <div ng-show="frmClientes.uName.$touched">
+                <!--Aparece somente se ocorrer error "required"-->
+                <span ng-show="frmClientes.uName.$error.required">Campo Nome obrigatorio</span>
+                 <!--Aparece somente se ocorrer error "minlength"-->
+                <span ng-show="frmClientes.uName.$error.minlength">Campo Nome com no minimo 3 letras</span>
+                <!--Aparece somente se ocorrer error "maxlength"-->
+                <span ng-show="frmClientes.uName.$error.maxlength">Campo Nome com no maximo 40 letras</span>
+            </div>
+        </div>
+        <div>
+            <label>E-mail: </label>
+            <input type="email" name ="uEmail" ng-model="cliente.email" required/>
+            <div ng-show="frmClientes.uEmail.$touched">
+                <span ng-show="frmClientes.uEmail.$error.email">Favor inserir um email valido</span>
+                <span ng-show="frmClientes.uEmail.$error.required">Campo e-mail obrigatório</span>
+            </div>
+            <div>
+            <label>Estado: </label>
+                <select name = "selectEstado" ng-model="cliente.estado">                
+                    <option ng-repeat="est in estados" value="{{est}}">{{est.uf}}</option>                
+                </select>
+            </div>
+        </div>
+        <input type="submit" value="Salvar" ng-click="salvarCliente(frmClientes)" ng-disabled="frmClientes.$invalid"/>
+        <input type="button" value="Cancelar" ng-click="cancelarCliente(frmClientes)" ng-disabled="frmClientes.$invalid"/>
+        <br/>
+        <fieldset>
+            <legend>Formulário</legend>
+            Valid: {{frmClientes.$valid}}<br/>
+            Pristrine: {{frmClientes.$pristine}}<br/>
+            Untouched: {{frmClientes.$untouched}}<br/>
+        </fieldset>
+        <fieldset>
+            <legend>Nome</legend>
+            Valid: {{frmClientes.uName.$valid}}<br/>
+            Invalid: {{frmClientes.uName.$invalid}}<br/>
+            Prestine: {{frmClientes.uName.$pristine}}<br/>
+            Dirty {{frmClientes.uName.$dirty}}<br/>
+            Touched: {{frmClientes.uName.$touched}}<br/>
+            Untouched: {{frmClientes.uName.$untouched}}<br/>
+            Error Required: {{frmClientes.uName.$error.required}}<br/>
+            Error MinLength (3): {{frmClientes.uName.$error.minlength}}<br/>
+            Error Maxlength (5): {{frmClientes.uName.$error.maxlength}}<br/>
+        </fieldset>
+        <fieldset>
+            <legend>E-mail</legend>
+            Valid: {{frmClientes.uEmail.$valid}}<br/>
+            Invalid: {{frmClientes.uEmail.$invalid}}<br/>
+            Prestine: {{frmClientes.uEmail.$pristine}}<br/>
+            Dirty {{frmClientes.uEmail.$dirty}}<br/>
+            Touched: {{frmClientes.uEmail.$touched}}<br/>
+            Untouched: {{frmClientes.uEmail.$untouched}}<br/>
+            Error Required: {{frmClientes.uEmail.$error.required}}<br/>
+            Error E-mail {{frmClientes.uEmail.$error.email}}<br/>
+        </fieldset>
+    </form>
+    <div ng-repeat="cli in clientes">
+        {{cli.name}}
+        <button ng-click="excluirCliente(cli)">Deletar</button>
+        <button ng-click="alterarCliente(cli)">Alterar</button>
+        <a href="clientes/{{cli.id}}">Detalhe</a>
+    </div>
+</div>
